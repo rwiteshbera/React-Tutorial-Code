@@ -1,0 +1,19 @@
+{
+    "blogs": [
+        {
+            "title": "C++ Tutorial",
+            "body": "C++ is a general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language, or C with Classes.",
+            "id": 1
+        },
+        {
+            "title": "Competitive Programming",
+            "body": "Competitive programming is a mind sport usually held over the Internet or a local network, involving participants trying to program according to provided specifications. Contestants are referred to as sport programmers. ... There are several organizations who host programming competitions on a regular basis.",
+            "id": 2
+        },
+        {
+            "title": "Web Development",
+            "body": "Web development is the work involved in developing a Web site for the Internet or an intranet. Web development can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+            "id": 3
+        }
+    ]
+}

@@ -2,29 +2,34 @@ import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
-   const [blogs, setBlogs] = useState([
-       {title: "lorem1", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin venenatis euismod.", author: "Rwitesh" , id:1},
-       {title: "lorem2", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin venenatis euismod.", author: "Mario", id:2},
-       {title: "lorem3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin venenatis euismod.", author: "Mario", id:3}
-   ])
+   const [blogs, setBlogs] = useState(null);
+   const [isPending, setIsPending] = useState(true);
 
-   const [name, setName] = useState("Mario");
 
    const handleDelete = (id) => {
         const newBlogs = blogs.filter((blogs) => blogs.id !== id)
         setBlogs(newBlogs);
    }
 
+   // Fetching data from JSON server using useEffect
    useEffect(() => {
-        console.log("Use Effect Ran");
-        console.log(name);
-   }, [name]);
+    setTimeout(() => {
+        fetch('http://localhost:8000/blogs')
+    .then( res => {
+        return res.json();
+    })
+    .then(data => {
+        console.log(data);
+        setBlogs(data);
+        setIsPending(false); // Disappear loading message immediately when page loaded
+    })
+    }, 2000)
+   }, []);
 
     return (
         <div className="home">
-           <BlogList blogsData = {blogs} title = "All Blogs" handleDelete={handleDelete}/>
-           <button onClick={() => setName("Lucifer")}>Change Name</button>
-           <p>{name}</p>
+        {isPending && <div>Loading...</div>}
+           {blogs && <BlogList blogsData = {blogs} title = "All Blogs" handleDelete={handleDelete}/>}
         </div>
     );
 }
